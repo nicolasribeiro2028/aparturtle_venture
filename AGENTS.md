@@ -21,12 +21,12 @@ Keep the stack simple; avoid adding new frameworks or services unless the plan b
 
 ## Steps to take (in order)
 
-1. **Project setup**  
+1. **Project setup**  -- DONE --
    - Initialize repo (frontend + backend or full-stack).  
    - Set up DB (SQLite or Postgres) and schema placeholders.  
    - Add placeholder map image and config path for map asset (e.g. `assets/campus-map.png` or env).
 
-2. **Front page**  
+2. **Front page**  -- DONE --
    - Public landing page; no auth required.  
    - CTA to sign in / sign up.  
    - No listings or map visible here.
