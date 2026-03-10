@@ -1,26 +1,46 @@
 @import "tailwindcss";
 
+/* Aparturtle — Bauhaus theme (green + purple). Extend here for scalability. */
 :root {
-  --background: #ffffff;
+  --background: #fafafa;
   --foreground: #171717;
+  /* Brand: green & purple */
+  --bauhaus-green: #2e7d32;
+  --bauhaus-green-light: #4caf50;
+  --bauhaus-green-dark: #1b5e20;
+  --bauhaus-purple: #6a1b9a;
+  --bauhaus-purple-light: #9c27b0;
+  --bauhaus-purple-dark: #4a148c;
+  --bauhaus-neutral: #212121;
+  --bauhaus-muted: #616161;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-bauhaus-green: var(--bauhaus-green);
+  --color-bauhaus-green-light: var(--bauhaus-green-light);
+  --color-bauhaus-green-dark: var(--bauhaus-green-dark);
+  --color-bauhaus-purple: var(--bauhaus-purple);
+  --color-bauhaus-purple-light: var(--bauhaus-purple-light);
+  --color-bauhaus-purple-dark: var(--bauhaus-purple-dark);
+  --color-bauhaus-neutral: var(--bauhaus-neutral);
+  --color-bauhaus-muted: var(--bauhaus-muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f0f0f;
+    --foreground: #f5f5f5;
+    --bauhaus-neutral: #e0e0e0;
+    --bauhaus-muted: #9e9e9e;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
