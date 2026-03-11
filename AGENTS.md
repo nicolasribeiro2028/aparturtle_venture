@@ -31,7 +31,7 @@ Keep the stack simple; avoid adding new frameworks or services unless the plan b
    - CTA to sign in / sign up.  
    - No listings or map visible here.
 
-3. **Simple auth**  
+3. **Simple auth**  -- DONE -- 
    - Sign up (e.g. email + password), sign in, sign out.  
    - Session (e.g. cookie).  
    - Protect all listing/map routes: redirect unauthenticated users to login.
