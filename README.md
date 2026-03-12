@@ -104,6 +104,10 @@ Building and apartment listings can be imported from a CSV. For college-focused 
 | `contact_email`        | No       | Leasing or landlord contact email                          |
 | `place_type`           | Yes      | Marker for type of place — e.g., `building`, `bus-stop`, `supermarket`, `restaurant`, etc. Use to tag differently on the map |
 
+
+### usefull links to try to search with APIs 
+ - civic data : https://www.civicdata.com/dataset?organization=evanston-9adef673-0141
+
 **Example:**
 
 ```csv
