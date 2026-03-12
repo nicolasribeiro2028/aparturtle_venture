@@ -38,6 +38,9 @@ yarn-error.log*
 prisma/*.db
 prisma/*.db-journal
 
+# User uploads (listing photos)
+/public/uploads
+
 # vercel
 .vercel
 

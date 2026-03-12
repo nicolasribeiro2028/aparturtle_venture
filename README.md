@@ -1,6 +1,8 @@
 # WildNest
 
-Student housing for a single campus: browse summer and year-long listings on a map, message listers, and post sublets or landlord listings. Public front page; map and listings require sign-in.
+Student housing for a single campus: browse summer and year-long listings on a map, message listers, and post sublets or landlord listings. Public front page and search (map); Post listing, Manage my sublets, and Messages require sign-in.
+
+**Status:** Main logic is implemented and the system is workable. Many small UI interfaces need refinement. A house-selection algorithm is planned for later implementation.
 
 **Construction plan:** See **[AGENTS.md](./AGENTS.md)** for the step-by-step build, tech choices, and data model. All design and implementation decisions should align with that document.
 
@@ -12,6 +14,13 @@ Student housing for a single campus: browse summer and year-long listings on a m
 - **Backend:** Next.js API routes
 - **Database:** SQLite with Prisma
 - **Theme:** Bauhaus-inspired (green + purple)
+
+---
+
+## Planned improvements
+
+- **UI polish** — Refine many small interface elements across the app
+- **House-selection algorithm** — Implement matching/recommendation logic for listings (to be added later)
 
 ---
 
@@ -46,7 +55,8 @@ npm run dev            # start dev server at http://localhost:3000
 ### Environment
 
 - `DATABASE_URL` — SQLite path, e.g. `file:./dev.db` (default in `.env`)
-- `NEXT_PUBLIC_MAP_IMAGE_PATH` — Map image path (default `/assets/campus-map.png`). Replace the file in `public/assets/` when you have the real campus map.
+- `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN` — Mapbox API key for interactive map. Get one at [mapbox.com](https://mapbox.com). Omit to fallback to static image.
+- `NEXT_PUBLIC_MAP_IMAGE_PATH` — Fallback map image path (default `/assets/campus-map.png`) when Mapbox token is not set.
 
 ---
 
@@ -57,7 +67,8 @@ app/
   page.tsx          # Public front page (landing)
   login/             # Sign-in (placeholder until Step 3)
   signup/            # Sign-up (placeholder until Step 3)
-  search/            # Search / map entry (placeholder)
+  search/            # Map + pins (public; Mapbox or static fallback)
+  listings/[id]/     # Listing detail (public; from map pin click)
   lib/                # db.ts, config.ts
   globals.css        # Bauhaus theme (green, purple)
 components/
@@ -72,3 +83,5 @@ prisma/
 ## License
 
 Private — for MVP development.
+
+
