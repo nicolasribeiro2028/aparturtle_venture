@@ -43,6 +43,7 @@ export default async function EditListingPage({
             endDate: listing.endDate,
             pinX: listing.pinX,
             pinY: listing.pinY,
+            imageUrls: listing.imageUrls,
           }}
         />
       </div>

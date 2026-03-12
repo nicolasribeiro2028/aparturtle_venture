@@ -5,7 +5,6 @@ import { useActionState } from "react";
 import Link from "next/link";
 import { PinPicker } from "@/components/map/PinPicker";
 import { updateListingAction } from "@/app/actions/listings";
-import type { ListingFormData } from "@/app/actions/listings";
 
 const initialState = { error: "" as string | undefined };
 
@@ -21,26 +20,14 @@ interface EditListingFormProps {
     endDate: string | null;
     pinX: number;
     pinY: number;
+    imageUrls: string | null;
   };
 }
 
 export function EditListingForm({ listingId, initialData }: EditListingFormProps) {
   const [state, formAction] = useActionState(
     async (_prev: typeof initialState, formData: FormData) => {
-      const pinXVal = parseFloat(formData.get("pinX") as string) || initialData.pinX;
-      const pinYVal = parseFloat(formData.get("pinY") as string) || initialData.pinY;
-      const data: ListingFormData = {
-        tag: (formData.get("tag") as "sublet" | "landlord") || "sublet",
-        term: (formData.get("term") as "summer" | "year_long") || "summer",
-        title: (formData.get("title") as string)?.trim() || "",
-        description: (formData.get("description") as string)?.trim() || undefined,
-        price: (formData.get("price") as string)?.trim() || undefined,
-        startDate: (formData.get("startDate") as string)?.trim() || undefined,
-        endDate: (formData.get("endDate") as string)?.trim() || undefined,
-        pinX: pinXVal,
-        pinY: pinYVal,
-      };
-      return updateListingAction(listingId, data);
+      return updateListingAction(listingId, formData);
     },
     initialState
   );
@@ -49,7 +36,7 @@ export function EditListingForm({ listingId, initialData }: EditListingFormProps
   const [pinY, setPinY] = useState(initialData.pinY);
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction} className="space-y-6" encType="multipart/form-data">
       <input type="hidden" name="pinX" value={pinX} />
       <input type="hidden" name="pinY" value={pinY} />
       {state?.error && (
@@ -190,6 +177,20 @@ export function EditListingForm({ listingId, initialData }: EditListingFormProps
             className="w-full rounded-lg border border-zinc-300 px-3 py-2 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
           />
         </div>
+      </div>
+
+      <div>
+        <label htmlFor="images" className="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+          Add more photos (optional, max 5 total)
+        </label>
+        <input
+          id="images"
+          name="images"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          multiple
+          className="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
+        />
       </div>
 
       <div>

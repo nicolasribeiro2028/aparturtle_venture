@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { PinPicker } from "@/components/map/PinPicker";
 import { createListingAction } from "@/app/actions/listings";
-import type { ListingFormData } from "@/app/actions/listings";
 
 const initialState = { error: "" as string | undefined };
 
@@ -18,21 +17,7 @@ export function PostListingForm() {
 
   const [state, formAction] = useActionState(
     async (_prev: typeof initialState, formData: FormData) => {
-      const pinXVal = parseFloat(formData.get("pinX") as string) || 50;
-      const pinYVal = parseFloat(formData.get("pinY") as string) || 45;
-      const data: ListingFormData & { returnTo?: string } = {
-        tag: (formData.get("tag") as "sublet" | "landlord") || "sublet",
-        term: (formData.get("term") as "summer" | "year_long") || "summer",
-        title: (formData.get("title") as string)?.trim() || "",
-        description: (formData.get("description") as string)?.trim() || undefined,
-        price: (formData.get("price") as string)?.trim() || undefined,
-        startDate: (formData.get("startDate") as string)?.trim() || undefined,
-        endDate: (formData.get("endDate") as string)?.trim() || undefined,
-        pinX: pinXVal,
-        pinY: pinYVal,
-        returnTo: (formData.get("returnTo") as string) || undefined,
-      };
-      return createListingAction(data);
+      return createListingAction(formData);
     },
     initialState
   );
@@ -41,7 +26,7 @@ export function PostListingForm() {
   const [pinY, setPinY] = useState(45);
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction} className="space-y-6" encType="multipart/form-data">
       <input type="hidden" name="pinX" value={pinX} />
       <input type="hidden" name="pinY" value={pinY} />
       {returnTo === "my-sublets" && (
@@ -158,6 +143,20 @@ export function PostListingForm() {
             className="w-full rounded-lg border border-zinc-300 px-3 py-2 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
           />
         </div>
+      </div>
+
+      <div>
+        <label htmlFor="images" className="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+          Photos (optional, max 5)
+        </label>
+        <input
+          id="images"
+          name="images"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          multiple
+          className="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
+        />
       </div>
 
       <div>

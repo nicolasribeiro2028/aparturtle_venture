@@ -60,8 +60,8 @@ Keep the stack simple; avoid adding new frameworks or services unless the plan b
    - API: create conversation from listing, send message, list conversations, get thread.  
    - UI: “Message” on listing detail → conversation; inbox list and thread view with reply.
 
-8. **Listing images**  
-   - Upload listing photos; store URLs (e.g. in `image_urls`).  
+8. **Listing images**  -- DONE --
+   - Upload listing photos; store URLs in `image_urls` (JSON array). Local storage in `public/uploads/`.  
    - Show images on listing card and detail page.
 
 9. **Polish**  

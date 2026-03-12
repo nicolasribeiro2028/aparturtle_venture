@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { getListings } from "@/app/actions/listings";
 import { ListingFilters } from "@/components/listings/ListingFilters";
+import { ListingImages } from "@/components/listings/ListingImages";
 
 export default async function ListingsPage({
   searchParams,
@@ -53,7 +54,8 @@ export default async function ListingsPage({
                 href={`/listings/${listing.id}`}
                 className="block rounded-lg border border-zinc-200 bg-white p-4 transition-colors hover:border-amber-300 hover:bg-amber-50/50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-amber-600 dark:hover:bg-amber-950/20"
               >
-                <div className="flex items-start justify-between gap-4">
+                <ListingImages imageUrls={listing.imageUrls} variant="card" />
+                <div className="mt-4 flex items-start justify-between gap-4">
                   <div>
                     <div className="mb-1 flex items-center gap-2">
                       <span className="rounded bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/50 dark:text-amber-200">

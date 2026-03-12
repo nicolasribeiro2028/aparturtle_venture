@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getListingById } from "@/app/actions/listings";
 import { getCurrentUserId } from "@/app/lib/auth";
 import { ListingActions } from "@/components/listings/ListingActions";
+import { ListingImages } from "@/components/listings/ListingImages";
 import { MessageButton } from "@/components/listings/MessageButton";
 
 export default async function ListingDetailPage({
@@ -51,6 +52,7 @@ export default async function ListingDetailPage({
             ${listing.price}
           </p>
         )}
+        <ListingImages imageUrls={listing.imageUrls} variant="detail" />
         {listing.description && (
           <p className="mt-4 text-zinc-600 dark:text-zinc-400">
             {listing.description}

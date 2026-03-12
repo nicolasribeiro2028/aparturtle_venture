@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getMySublets } from "@/app/actions/listings";
+import { ListingImages } from "@/components/listings/ListingImages";
 import { SubletActions } from "@/components/listings/SubletActions";
 
 export default async function MySubletsPage() {
@@ -42,7 +43,8 @@ export default async function MySubletsPage() {
                 href={`/listings/${sublet.id}`}
                 className="min-w-0 flex-1"
               >
-                <div className="mb-1 flex items-center gap-2">
+                <ListingImages imageUrls={sublet.imageUrls} variant="card" />
+                <div className="mb-1 mt-2 flex items-center gap-2">
                   <span className="rounded bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
                     {sublet.term}
                   </span>
