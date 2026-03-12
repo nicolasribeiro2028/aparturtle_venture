@@ -1,6 +1,6 @@
 # WildNest
 
-Student housing for a single campus: browse summer and year-long listings on a map, message listers, and post sublets or landlord listings. Public front page; map and listings require sign-in.
+Student housing for a single campus: browse summer and year-long listings on a map, message listers, and post sublets or landlord listings. Public front page and search (map); Post listing, Manage my sublets, and Messages require sign-in.
 
 **Construction plan:** See **[AGENTS.md](./AGENTS.md)** for the step-by-step build, tech choices, and data model. All design and implementation decisions should align with that document.
 
@@ -58,8 +58,8 @@ app/
   page.tsx          # Public front page (landing)
   login/             # Sign-in (placeholder until Step 3)
   signup/            # Sign-up (placeholder until Step 3)
-  (protected)/search/ # Map + pins (Mapbox or static fallback)
-  (protected)/listings/[id]/  # Listing detail (from map pin click)
+  search/            # Map + pins (public; Mapbox or static fallback)
+  listings/[id]/     # Listing detail (public; from map pin click)
   lib/                # db.ts, config.ts
   globals.css        # Bauhaus theme (green, purple)
 components/

@@ -28,15 +28,16 @@ Keep the stack simple; avoid adding new frameworks or services unless the plan b
 
 2. **Front page**  -- DONE --
    - Public landing page; no auth required.  
-   - CTA to sign in / sign up.  
-   - No listings or map visible here.
+   - CTA to sign in / sign up; link to search (map).  
+   - Search and listing detail are public.
 
-3. **Simple auth**  
+3. **Simple auth**  -- DONE--
    - Sign up (e.g. email + password), sign in, sign out.  
    - Session (e.g. cookie).  
-   - Protect all listing/map routes: redirect unauthenticated users to login.
+   - Search (map) and listing detail are **public** (no login required).  
+   - Protect Post listing, Manage my sublets, Messages: redirect unauthenticated users to login.
 
-4. **Map + pins** 
+4. **Map + pins** --DONE--
    - Use Mapbox GL JS with `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN`; fallback to static image if key missing.  
    - Map config: center (campus lat/lng), zoom, style in `app/lib/config.ts`.  
    - Fetch listings from DB; convert `pin_x`, `pin_y` (0–100%) to lat/lng within campus bounds.  

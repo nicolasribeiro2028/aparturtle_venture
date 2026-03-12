@@ -23,7 +23,7 @@ async function main() {
   });
   console.log("Master user ready:", user.email);
 
-  // Sample listing for map testing (step 4)
+  // Sample listings for map testing (step 4)
   await prisma.listing.upsert({
     where: { id: "seed-listing-1" },
     update: {},
@@ -41,7 +41,26 @@ async function main() {
       pinY: 45,
     },
   });
-  console.log("Sample listing ready for map");
+
+  // Listing at 42.05877866571863, -87.68312156256962 (converted to pin %)
+  await prisma.listing.upsert({
+    where: { id: "seed-listing-2" },
+    update: {},
+    create: {
+      id: "seed-listing-2",
+      userId: user.id,
+      tag: "landlord",
+      term: "year_long",
+      title: "North campus apartment",
+      description: "Spacious 1BR near the lake.",
+      price: "1200",
+      startDate: "2025-09-01",
+      endDate: "2026-06-30",
+      pinX: 9.39,
+      pinY: -7.79,
+    },
+  });
+  console.log("Sample listings ready for map");
 }
 
 main()

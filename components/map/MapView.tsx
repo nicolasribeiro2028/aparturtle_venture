@@ -49,7 +49,7 @@ export function MapView({ pins }: MapViewProps) {
 
       const markerEl = document.createElement("div");
       markerEl.className =
-        "cursor-pointer w-8 h-8 rounded-full bg-amber-500 border-2 border-white shadow-md flex items-center justify-center text-white text-xs font-bold hover:scale-110 transition-transform";
+        "cursor-pointer w-8 h-8 rounded-full bg-amber-500 border-2 border-white shadow-md flex items-center justify-center text-white text-xs font-bold hover:brightness-110 hover:ring-2 hover:ring-amber-600 transition-all";
       markerEl.innerHTML = "📍";
       markerEl.title = pin.title;
 
@@ -71,7 +71,7 @@ export function MapView({ pins }: MapViewProps) {
 
   if (!mapboxAccessToken) {
     return (
-      <div className="relative w-full max-w-4xl overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 aspect-[4/3] min-h-[300px]">
+      <div className="relative w-full max-w-4xl overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 h-[800px]">
         <Image
           src={mapImagePath}
           alt="Campus map"
@@ -82,7 +82,7 @@ export function MapView({ pins }: MapViewProps) {
           <button
             key={pin.id}
             type="button"
-            className="absolute cursor-pointer w-8 h-8 -translate-x-1/2 -translate-y-full rounded-full bg-amber-500 border-2 border-white shadow-md flex items-center justify-center text-white text-xs font-bold hover:scale-110 transition-transform"
+            className="absolute cursor-pointer w-8 h-8 -translate-x-1/2 -translate-y-full rounded-full bg-amber-500 border-2 border-white shadow-md flex items-center justify-center text-white text-xs font-bold hover:brightness-110 hover:ring-2 hover:ring-amber-600 transition-all"
             style={{ left: `${pin.pinX}%`, top: `${pin.pinY}%` }}
             title={pin.title}
             onClick={() => router.push(`/listings/${pin.id}`)}
@@ -97,7 +97,7 @@ export function MapView({ pins }: MapViewProps) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[400px] rounded-lg border border-zinc-200 overflow-hidden"
+      className="relative w-full h-[800px] rounded-lg border border-zinc-200 overflow-hidden"
     />
   );
 }

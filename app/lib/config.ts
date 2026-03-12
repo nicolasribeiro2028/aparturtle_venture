@@ -9,8 +9,8 @@ export const mapImagePath =
 export const mapboxAccessToken =
   process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN ?? "";
 
-/** Evanston campus center (Northwestern) */
-export const mapCenter: [number, number] = [-87.675, 42.053];
+/** Evanston campus center (Northwestern), shifted west for better framing */
+export const mapCenter: [number, number] = [-87.682, 42.053];
 export const mapZoom = 14;
 export const mapStyle = "mapbox://styles/mapbox/light-v11";
 
