@@ -2,18 +2,25 @@
 
 import { useState } from "react";
 import { useActionState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { PinPicker } from "@/components/map/PinPicker";
+import dynamic from "next/dynamic";
+
+const PinPicker = dynamic(
+  () => import("@/components/map/PinPicker").then((m) => m.PinPicker),
+  { ssr: false, loading: () => <div className="h-64 animate-pulse rounded-lg bg-zinc-100 dark:bg-zinc-800" /> }
+);
+import { ListingTagsPicker } from "@/components/listings/ListingTagsPicker";
 import { createListingAction } from "@/app/actions/listings";
 
 const initialState = { error: "" as string | undefined };
 
-export function PostListingForm() {
-  const searchParams = useSearchParams();
-  const tagParam = searchParams.get("tag");
-  const returnTo = searchParams.get("returnTo");
-  const defaultTag = tagParam === "sublet" || tagParam === "landlord" ? tagParam : "sublet";
+export function PostListingForm({
+  defaultTag = "sublet",
+  returnTo,
+}: {
+  defaultTag?: "sublet" | "landlord";
+  returnTo?: string;
+}) {
 
   const [state, formAction] = useActionState(
     async (_prev: typeof initialState, formData: FormData) => {
@@ -26,7 +33,7 @@ export function PostListingForm() {
   const [pinY, setPinY] = useState(45);
 
   return (
-    <form action={formAction} className="space-y-6" encType="multipart/form-data">
+    <form action={formAction} className="space-y-6">
       <input type="hidden" name="pinX" value={pinX} />
       <input type="hidden" name="pinY" value={pinY} />
       {returnTo === "my-sublets" && (
@@ -157,6 +164,17 @@ export function PostListingForm() {
           multiple
           className="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"
         />
+      </div>
+
+      <div>
+        <label className="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
+          Property tags{" "}
+          <span className="font-normal text-zinc-400">(optional)</span>
+        </label>
+        <p className="mb-2 text-xs text-zinc-400">
+          Tag features that match student preferences — helps with future recommendations.
+        </p>
+        <ListingTagsPicker />
       </div>
 
       <div>

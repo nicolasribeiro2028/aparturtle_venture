@@ -44,6 +44,7 @@ export default async function EditListingPage({
             pinX: listing.pinX,
             pinY: listing.pinY,
             imageUrls: listing.imageUrls,
+            amenityTags: listing.amenityTags,
           }}
         />
       </div>

@@ -1,8 +1,16 @@
 import Link from "next/link";
-import { Suspense } from "react";
 import { PostListingForm } from "@/components/listings/PostListingForm";
 
-export default function PostListingPage() {
+export default async function PostListingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string; returnTo?: string }>;
+}) {
+  const params = await searchParams;
+  const defaultTag =
+    params.tag === "sublet" || params.tag === "landlord" ? params.tag : "sublet";
+  const returnTo = params.returnTo === "my-sublets" ? "my-sublets" : undefined;
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
       <Link
@@ -18,9 +26,7 @@ export default function PostListingPage() {
         Add your sublet or landlord listing to the map.
       </p>
       <div className="mt-8">
-        <Suspense fallback={<div className="h-64 animate-pulse rounded-lg bg-zinc-100 dark:bg-zinc-800" />}>
-          <PostListingForm />
-        </Suspense>
+        <PostListingForm defaultTag={defaultTag} returnTo={returnTo} />
       </div>
     </div>
   );

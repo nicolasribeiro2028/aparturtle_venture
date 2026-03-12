@@ -51,7 +51,8 @@ model Listing {
   endDate     String?  @map("end_date")
   pinX        Float    @map("pin_x")   // 0–100 percentage on map
   pinY        Float    @map("pin_y")   // 0–100 percentage on map
-  imageUrls   String?  @map("image_urls") // JSON array as string for SQLite
+  imageUrls   String?  @map("image_urls")   // JSON array as string for SQLite
+  amenityTags String?  @map("amenity_tags") // JSON array as string for SQLite
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 

@@ -21,6 +21,7 @@ export type ListingFormData = {
   pinX: number;
   pinY: number;
   imageUrls?: string[];
+  amenityTags?: string | null;
 };
 
 export async function getListingsForMap() {
@@ -82,6 +83,15 @@ function extractFormData(formData: FormData): ListingFormData & { returnTo?: str
     pinX: pinXVal,
     pinY: pinYVal,
     returnTo: (formData.get("returnTo") as string) || undefined,
+    amenityTags: (() => {
+      const raw = (formData.get("amenity_tags") as string) || "[]";
+      try {
+        const arr = JSON.parse(raw) as string[];
+        return arr.length > 0 ? JSON.stringify(arr) : null;
+      } catch {
+        return null;
+      }
+    })(),
   };
 }
 
@@ -110,6 +120,7 @@ export async function createListingAction(formData: FormData) {
       endDate: data.endDate?.trim() || null,
       pinX: data.pinX,
       pinY: data.pinY,
+      amenityTags: data.amenityTags ?? null,
     },
   });
 
@@ -167,6 +178,7 @@ export async function updateListingAction(listingId: string, formData: FormData)
       pinX: data.pinX,
       pinY: data.pinY,
       imageUrls: stringifyImageUrls(imageUrls),
+      amenityTags: data.amenityTags ?? null,
     },
   });
 
