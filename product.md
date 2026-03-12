@@ -2,6 +2,8 @@
 
 This file organizes all **production-side** requirements for the WildNest MVP: brand, design system, UI specs, and content guidelines. Use this for design decisions and implementation consistency.
 
+> **Implementation:** Design tokens live in `app/design-tokens.css`. Edit that file to change colors, fonts, sizes, and spacing across the app.
+
 ---
 
 ## Brand assets
