@@ -5,6 +5,7 @@ import { getCurrentUserId } from "@/app/lib/auth";
 import { ListingActions } from "@/components/listings/ListingActions";
 import { ListingImages } from "@/components/listings/ListingImages";
 import { MessageButton } from "@/components/listings/MessageButton";
+import { LISTING_AMENITY_TAGS } from "@/components/listings/ListingTagsPicker";
 
 export default async function ListingDetailPage({
   params,
@@ -58,6 +59,32 @@ export default async function ListingDetailPage({
             {listing.description}
           </p>
         )}
+        {/* Amenity tags */}
+        {listing.amenityTags && (() => {
+          try {
+            const tags = JSON.parse(listing.amenityTags) as string[];
+            if (!tags.length) return null;
+            return (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {tags.map((val) => {
+                  const def = LISTING_AMENITY_TAGS.find((t) => t.value === val);
+                  if (!def) return null;
+                  return (
+                    <span
+                      key={val}
+                      className="flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-800 dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
+                    >
+                      {def.emoji} {def.label}
+                    </span>
+                  );
+                })}
+              </div>
+            );
+          } catch {
+            return null;
+          }
+        })()}
+
         {listing.user && (
           <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-400">
             Listed by {listing.user.firstName} {listing.user.lastName}
